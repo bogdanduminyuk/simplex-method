@@ -4,24 +4,6 @@ from warnings import warn
 
 class Simplex(object):
     def __init__(self, num_vars, constraints, objective_function):
-        """
-        num_vars: Number of variables
-
-        equations: A list of strings representing constraints
-        each variable should be start with x followed by a underscore
-        and a number
-        eg of constraints
-        ['1x_1 + 2x_2 >= 4', '2x_3 + 3x_1 <= 5', 'x_3 + 3x_2 = 6']
-        Note that in x_num, num should not be more than num_vars.
-        Also single spaces should be used in expressions.
-
-        objective_function: should be a tuple with first element
-        either 'min' or 'max', and second element be the equation
-        eg 
-        ('min', '2x_1 + 4x_3 + 5x_2')
-
-        For solution finding algorithm uses two-phase simplex method
-        """
         self.num_vars = num_vars
         self.constraints = constraints
         self.objective = objective_function[0]
@@ -121,8 +103,8 @@ class Simplex(object):
             key_row = self.find_key_row(key_column = key_column)
             self.basic_vars[key_row] = key_column
             pivot = self.coeff_matrix[key_row][key_column]
-            self.normalize_to_pivot(key_row, pivot)
-            self.make_key_column_zero(key_column, key_row)
+            self.divide_by_key_element(key_row, pivot)
+            self.calculate_table(key_column, key_row)
 
             key_column = max_index(self.coeff_matrix[0])
             condition = self.coeff_matrix[0][key_column] > 0
@@ -142,11 +124,11 @@ class Simplex(object):
             warn("Dengeneracy")
         return min_i
 
-    def normalize_to_pivot(self, key_row, pivot):
+    def divide_by_key_element(self, key_row, pivot):
         for i in range(len(self.coeff_matrix[0])):
             self.coeff_matrix[key_row][i] /= pivot
 
-    def make_key_column_zero(self, key_column, key_row):
+    def calculate_table(self, key_column, key_row):
         num_columns = len(self.coeff_matrix[0])
         for i in range(len(self.coeff_matrix)):
             if i != key_row:
@@ -196,8 +178,8 @@ class Simplex(object):
             key_row = self.find_key_row(key_column = key_column)
             self.basic_vars[key_row] = key_column
             pivot = self.coeff_matrix[key_row][key_column]
-            self.normalize_to_pivot(key_row, pivot)
-            self.make_key_column_zero(key_column, key_row)
+            self.divide_by_key_element(key_row, pivot)
+            self.calculate_table(key_column, key_row)
 
             key_column = max_index(self.coeff_matrix[0])
             condition = self.coeff_matrix[0][key_column] > 0
@@ -228,8 +210,8 @@ class Simplex(object):
             key_row = self.find_key_row(key_column = key_column)
             self.basic_vars[key_row] = key_column
             pivot = self.coeff_matrix[key_row][key_column]
-            self.normalize_to_pivot(key_row, pivot)
-            self.make_key_column_zero(key_column, key_row)
+            self.divide_by_key_element(key_row, pivot)
+            self.calculate_table(key_column, key_row)
 
             key_column = min_index(self.coeff_matrix[0])
             condition = self.coeff_matrix[0][key_column] < 0
