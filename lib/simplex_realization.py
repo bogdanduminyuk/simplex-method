@@ -2,9 +2,9 @@ from lib.simplex import Simplex
 
 
 class SimplexRealization(Simplex):
-    def __init__(self, num_vars, num_constaints, condition, function_coeffs, var_coeffs, signs, free_coeffs):
+    def __init__(self, num_vars, num_constraints, condition, function_coeffs, var_coeffs, signs, free_coeffs):
         objective_function = SimplexRealization.build_objective(num_vars, condition, function_coeffs)
-        constraints = SimplexRealization.build_constraints(num_vars, num_constaints, var_coeffs, signs, free_coeffs)
+        constraints = SimplexRealization.build_constraints(num_vars, num_constraints, var_coeffs, signs, free_coeffs)
         print("\nYour goal function is: {} -> {}\n".format(objective_function[1], objective_function[0]))
         print("Your constraints is: ")
         for i in constraints:
