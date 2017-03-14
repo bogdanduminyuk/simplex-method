@@ -64,7 +64,10 @@ class Simplex(object):
 
                 elif constraint[j] == '>=':
                     coeff_matrix[i][s_index] = Fraction("-1/1")  # slack variable
-                    coeff_matrix[i][r_index] = Fraction("1/1")   # r variable
+                    try:
+                        coeff_matrix[i][r_index] = Fraction("1/1")   # r variable
+                    except IndexError:
+                        coeff_matrix[i].append(Fraction("1/1"))
                     s_index += 1
                     r_index += 1
                     r_rows.append(i)

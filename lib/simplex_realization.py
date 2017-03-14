@@ -5,7 +5,10 @@ class SimplexRealization(Simplex):
     def __init__(self, num_vars, num_constaints, condition, function_coeffs, var_coeffs, signs, free_coeffs):
         objective_function = SimplexRealization.build_objective(num_vars, condition, function_coeffs)
         constraints = SimplexRealization.build_constraints(num_vars, num_constaints, var_coeffs, signs, free_coeffs)
-
+        print("\nYour goal function is: {} -> {}\n".format(objective_function[1], objective_function[0]))
+        print("Your constraints is: ")
+        for i in constraints:
+            print(i)
         super(SimplexRealization, self).__init__(num_vars, constraints, objective_function)
 
     @staticmethod
@@ -36,18 +39,20 @@ class SimplexRealization(Simplex):
 
 
 if __name__ == "__main__":
-    n_vars = 4
-    n_count = 2
-    goal = "max"
+    n_vars = 2
+    n_count = 4
+    goal = "min"
 
-    function_coeffs = [2, 4, 4, 1]
+    function_coeffs = [1, 2]
     vars_coeffs = [
-        [0, 1, 1, -1],
-        [2, 0, -2, 1],
+        [0, 1],
+        [1, 0],
+        [1, -2],
+        [-1, 1],
     ]
 
-    signs = ["=", "="]
-    free_coeffs = [1, 2]
+    signs = [">=", ">=", ">=", ">="]
+    free_coeffs = [1, 4, 4, 1]
 
     Lp_system = SimplexRealization(n_vars, n_count, goal, function_coeffs, vars_coeffs, signs, free_coeffs)
 
