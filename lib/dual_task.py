@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from .simplex import Simplex
+from lib.simplex import Simplex
 
 
 class Dual(Simplex):
