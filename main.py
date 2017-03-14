@@ -1,5 +1,6 @@
 import argparse
 
+from lib.dual_task import Dual
 from lib.simplex_realization import SimplexRealization
 
 
@@ -37,7 +38,7 @@ if __name__ == "__main__":
 
         constraints_coeffs.append(constraint_coeffs)
 
-    Lp_system = SimplexRealization(args.v_count, args.c_count,
+    Lp_system = Dual(args.v_count, args.c_count,
                                    args.g_condition, coeffs, constraints_coeffs,
                                    signs, free_coeffs)
 

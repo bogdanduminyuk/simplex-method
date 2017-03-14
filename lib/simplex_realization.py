@@ -9,6 +9,8 @@ class SimplexRealization(Simplex):
         print("Your constraints is: ")
         for i in constraints:
             print(i)
+        import time
+        time.sleep(1)
         super(SimplexRealization, self).__init__(num_vars, constraints, objective_function)
 
     @staticmethod
