@@ -112,37 +112,33 @@ def BetterOptimal():
         aRoute[aPath[w][0]][aPath[w][1]] -= nMin
         aRoute[aPath[w - 1][0]][aPath[w - 1][1]] += nMin
 
+if __name__ == "__main__":
+    aCost = [
+        [2, 4, 1, 6, 7],
+        [3, 100, 5, 100, 2],
+        [8, 9, 6, 3, 4],
+    ]
+    aDemand = [80, 60, 70, 100, 50]
+    aSupply = [120, 110, 130]
 
-# my example
-aCost = [
-    [2, 4, 1, 6, 7],
-    [3, 100, 5, 100, 2],
-    [8, 9, 6, 3, 4],
-]
-aDemand = [80, 60, 70, 100, 50]
-aSupply = [120, 110, 130]
+    PivotN = -1
+    PivotM = -1
 
-n = len(aSupply)
-m = len(aDemand)
-nVeryLargeNumber = 99999999999
-# add a small amount to prevent degeneracy
-# degeneracy can occur when the sums of subsets of supply and demand equal
-elipsis = 0.001
-for k in aDemand:
-    k += elipsis / len(aDemand)
-aSupply[1] += elipsis
-# initialisation
-aRoute = []
-for x in range(n):
-    aRoute.append([0] * m)
-aDual = []
-for x in range(n):
-    aDual.append([-1] * m)
-NorthWest()
-PivotN = -1
-PivotM = -1
-# MAIN
-while NotOptimal():
-    BetterOptimal()
+    n = len(aSupply)
+    m = len(aDemand)
+    nVeryLargeNumber = 99999999
 
-PrintOut()
+    aRoute = []
+    for x in range(n):
+        aRoute.append([0] * m)
+    aDual = []
+
+    for x in range(n):
+        aDual.append([-1] * m)
+
+    NorthWest()
+
+    while NotOptimal():
+        BetterOptimal()
+
+    PrintOut()
