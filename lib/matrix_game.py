@@ -1,35 +1,16 @@
 # coding: utf-8
 
 
+def get_col(matrix, index):
+    return [matrix[i][index] for i in range(len(matrix))]
+
+
 def get_bj(matrix):
-    def get_max_col(matrix, index):
-        col = []
+    return [max(get_col(matrix, i)) for i in range(len(matrix[0]))]
 
-        for i in range(len(matrix)):
-            col.append(matrix[i][index])
-
-        return max(col)
-    
-    bj = []
-
-    for i in range(len(matrix[0])):
-        bj.append(get_max_col(matrix, i))
-
-    return bj
 
 def get_ai(matrix):
-    ai = []
-
-    for i in range(len(matrix)):
-        ai.append(min(matrix[i]))
-
-    return ai
-
-def get_alpha(ai):
-    return max(ai)
-
-def get_betha(bj):
-    return min(bj);
+    return [min(matrix[i]) for i in range(len(matrix))]
 
 
 if __name__ == "__main__":
@@ -42,8 +23,8 @@ if __name__ == "__main__":
 
     Ai = get_ai(matrix)
     Bj = get_bj(matrix)
-    alpha = get_alpha(Ai)
-    betha = get_betha(Bj)
+    alpha = max(Ai)
+    betha = min(Bj)
     
     print("Your matrix is:")
 
